@@ -19,8 +19,7 @@ def replace_with_neighborCount(grid):
 	cols = len(grid[5]) #set cols to be the number of items in a given row (this should be the same for each row, I should add check to iterate over rows and make sure they all contain the same number of elements)
 
 	NeighborCount = [] #this will soon contain the number of live neighbors that each cell has
-	for row in range (rows):
-		NeighborCount.append('[0,]')
+	NeighborCount=[[0,] * cols for row in range (rows)]
 	print NeighborCount
 
 replace_with_neighborCount(grid)

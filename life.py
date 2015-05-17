@@ -2,12 +2,12 @@
 
 #create grid to be passed in with initial state
 grid = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -17,16 +17,16 @@ grid = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 #in order to count up neighbors lets convert grid to 1s and 0s. 
 #(I recognize this would have been easier with 1s and 0s as the grid itself but this looks cooler)
 
-def convert_to_cool(grid):
-	rows = len(grid)
-	cols = len(grid[5])
-	for row in range(rows):
-		for col in range(cols):
-			if grid[row][col] == 0:
-				grid[row][col] = "|"
-			else:
-				grid[row][col] = "+" 
-	return grid
+# def convert_to_cool(grid):
+# 	rows = len(grid)
+# 	cols = len(grid[5])
+# 	for row in range(rows):
+# 		for col in range(cols):
+# 			if grid[row][col] == 0:
+# 				grid[row][col] = 's'
+# 			else:
+# 				grid[row][col] = 'T' 
+# 	return grid
 
 #need to keep track of number of neighbors that are active at each tick
 def grid_with_neighborCount(grid):
@@ -43,5 +43,9 @@ def grid_with_neighborCount(grid):
 								+grid[row-1][col]					+grid[row+1][col]\
 								+grid[row+1][col+1]+grid[row][col+1]+grid[row-1][col+1]
 	return NeighborCount
-#convert_to_bool(grid)
+
+
+def iterate(grid, numTicks)
+	
 print grid_with_neighborCount(grid)
+

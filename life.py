@@ -42,4 +42,4 @@ def grid_with_neighborCount(grid):
 			NeighborCount[x][y] = grid[]
 
 convert_to_bool(grid)
-grid_with_neighborCount(grid)
+#grid_with_neighborCount(grid)

@@ -3,10 +3,10 @@
 #create grid to be passed in with initial state
 grid = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -30,13 +30,18 @@ grid = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 
 #need to keep track of number of neighbors that are active at each tick
 def grid_with_neighborCount(grid):
-	rows = len(grid) #set rows to be the number of lists in master list
-	cols = len(grid[5]) #set cols to be the number of items in a given row (this should be the same for each row, I should add check to iterate over rows and make sure they all contain the same number of elements)
-	
-	NeighborCount = [] #this will soon contain the number of live neighbors that each cell has
-	NeighborCount=[[0,] * cols for row in range (rows)] #found a cool list comprehension to help make a 0 matrix (https://docs.python.org/2/tutorial/datastructures.html)
+	#set rows to be the number of lists in master list
+	rows = len(grid) 
+	 #set cols to be the number of items in a given row 
+	 #(this should be the same for each row, I should add check to iterate over rows and make sure they all contain the same number of elements)
+	cols = len(grid[5])
 
-	#might need a buffer (rows-1) (cols-1), we'll see if i can figure out infinite or at least make it wrap around
+	#this will soon contain the number of live neighbors that each cell has
+	NeighborCount = [] 
+	#found a cool list comprehension to help make a 0 matrix (https://docs.python.org/2/tutorial/datastructures.html)
+	NeighborCount=[[0,] * cols for row in range (rows)] 
+
+	#Might need a buffer (rows-1) (cols-1), we'll see if i can figure out infinite or at least make it wrap around
 	for row in range(1,rows-1):
 		for col in range (1,cols-1):
 			NeighborCount[row][col] = grid[row-1][col-1]+grid[row][col-1]+grid[row+1][col-1]\
@@ -51,9 +56,24 @@ def display(grid):
 	for row in grid[1:-1]:
 		print row[1:-1]
 
-def iterate(grid, numTicks):
-	pass
-	
+def iterate(grid):
+	rows = len(grid)
+	cols = len(grid[5])
+	#call neighborcount() on the grid so we can use the number of neighbors in our logic
+	NeighborCount = grid_with_neighborCount(grid) 
+	for row in range(1,rows-1):
+		for col in range(1,cols-1):
+			#if the cell is alive and has either fewer than 2 or greater than 3 active neighbors, kill it
+			if grid[row][col] == 1 and NeighborCount[row][col]<2 or NeighborCount[row][col]>3:
+				grid[row][col] = 0
+			#if the cell is dead but has 3 active neighbors. revive it
+			elif grid[row][col] == 0 and NeighborCount[row][col] == 3:
+				grid[row][col] = 1
+	display(grid)
+		
 
-display(grid_with_neighborCount(grid))
+
+
+iterate(grid)
+iterate(grid)
 

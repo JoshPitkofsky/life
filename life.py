@@ -7,9 +7,9 @@ grid = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,1,0,0,0,0],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 		]
@@ -56,24 +56,26 @@ def display(grid):
 	for row in grid[1:-1]:
 		print row[1:-1]
 
-def iterate(grid):
+def iterate(grid, iterations):
 	rows = len(grid)
 	cols = len(grid[5])
-	#call neighborcount() on the grid so we can use the number of neighbors in our logic
-	NeighborCount = grid_with_neighborCount(grid) 
-	for row in range(1,rows-1):
-		for col in range(1,cols-1):
-			#if the cell is alive and has either fewer than 2 or greater than 3 active neighbors, kill it
-			if grid[row][col] == 1 and NeighborCount[row][col]<2 or NeighborCount[row][col]>3:
-				grid[row][col] = 0
-			#if the cell is dead but has 3 active neighbors. revive it
-			elif grid[row][col] == 0 and NeighborCount[row][col] == 3:
-				grid[row][col] = 1
-	display(grid)
-		
+	i=0
+	while i != iterations:
+		#call neighborcount() on the grid so we can use the number of neighbors in our logic
+		NeighborCount = grid_with_neighborCount(grid) 
+		for row in range(1,rows-1):
+			for col in range(1,cols-1):
+				#if the cell is alive and has either fewer than 2 or greater than 3 active neighbors, kill it
+				if grid[row][col] == 1 and NeighborCount[row][col]<2 or NeighborCount[row][col]>3:
+					grid[row][col] = 0
+				#if the cell is dead but has 3 active neighbors. revive it
+				elif grid[row][col] == 0 and NeighborCount[row][col] == 3:
+					grid[row][col] = 1
+		display(grid)
+		i+=1
 
 
 
-iterate(grid)
-iterate(grid)
+iterate(grid,9)
+
 

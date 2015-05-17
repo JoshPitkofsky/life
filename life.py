@@ -75,10 +75,19 @@ def iterate(grid, iterations):
 				elif grid[row][col] == 0 and NeighborCount[row][col] == 3:
 					grid[row][col] = 1
 		display(grid)
+		
+		#add new row to end of matrix
+		grid.append([0,] * cols)
+		#add new row to beginning of matrix
+		grid.insert(0,[0,] * cols)
+		#for each row, add a 0 to the end and beginning
+		for row in range (0,rows):
+			grid[row].extend([0])
+			grid[row].insert(0,[0])
 		#increment counter
 		i+=1
 		#pause
-		time.sleep(.1)
+		time.sleep(1)
 		#clear screen
 		print(chr(27) + "[2J") 
 

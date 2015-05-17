@@ -1,5 +1,5 @@
 #An extremely nieve implementation of conway's game of life
-
+import time
 #create grid to be passed in with initial state
 grid = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -73,6 +73,8 @@ def iterate(grid, iterations):
 					grid[row][col] = 1
 		display(grid)
 		i+=1
+		time.sleep(.1)
+		
 
 
 

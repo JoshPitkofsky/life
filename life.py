@@ -25,15 +25,14 @@ def convert_to_bool(grid):
 				grid[row][col] = 0
 			else:
 				grid[row][col] = 1 
-	print grid
+	return grid
 
 #need to keep track of number of neighbors that are active at each tick
 def grid_with_neighborCount(grid):
-	grid = convert_to_bool(grid)
-	print grid
 	rows = len(grid) #set rows to be the number of lists in master list
 	cols = len(grid[5]) #set cols to be the number of items in a given row (this should be the same for each row, I should add check to iterate over rows and make sure they all contain the same number of elements)
-
+	grid = convert_to_bool(grid)
+	print grid
 	NeighborCount = [] #this will soon contain the number of live neighbors that each cell has
 	NeighborCount=[[0,] * cols for row in range (rows)] #found a cool list comprehension to help make a 0 matrix (https://docs.python.org/2/tutorial/datastructures.html)
 	x=len(NeighborCount)
@@ -43,5 +42,5 @@ def grid_with_neighborCount(grid):
 		for col in range (cols-1):
 			NeighborCount[x][y] = grid[col-1][row-1]+grid[col][row-1]+grid[col+1][row-1]+grid[col-1][row]+grid[col+1][row]+grid[col+1][row+1]+grid[col][row+1]+grid[col-1][row+1]
 
-convert_to_bool(grid)
+#convert_to_bool(grid)
 grid_with_neighborCount(grid)

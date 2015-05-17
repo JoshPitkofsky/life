@@ -44,8 +44,16 @@ def grid_with_neighborCount(grid):
 								+grid[row+1][col+1]+grid[row][col+1]+grid[row-1][col+1]
 	return NeighborCount
 
+#for each row excluding the first and last
+#print each cell except the first and last in the list
+#(chop off buffer)
+def display(grid):
+	for row in grid[1:-1]:
+		print row[1:-1]
 
-def iterate(grid, numTicks)
+def iterate(grid, numTicks):
+	pass
 	
-print grid_with_neighborCount(grid)
+
+display(grid_with_neighborCount(grid))
 

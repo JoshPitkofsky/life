@@ -74,10 +74,44 @@ def iterate(grid, iterations):
 		display(grid)
 		i+=1
 		time.sleep(.1)
-		
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
+		print
 
 
-
-iterate(grid,9)
+iterate(grid,224)
 
 

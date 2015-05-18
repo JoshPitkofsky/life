@@ -2,14 +2,14 @@
 import time
 #create grid to be passed in with initial state
 grid = [[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0],
-		[0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
@@ -62,13 +62,14 @@ def iterate(grid, iterations):
 	rows = len(grid)
 	cols = len(grid[5])
 	i=0
-	j=0
-	k=0
-	l=0
-	m=0
+	
 	while i != iterations:
 		#call neighborcount() on the grid so we can use the number of neighbors in our logic
 		NeighborCount = grid_with_neighborCount(grid) 
+		j=0
+		k=0
+		l=0
+		m=0
 		for row in range(0,rows):
 			for col in range(0,cols):
 				#if there exists a live cell in top row
@@ -76,21 +77,22 @@ def iterate(grid, iterations):
 					grid.insert(0,[0,] * cols)
 					j=1
 				#if there exists a live cell in the bottom row
-				elif k==0 and grid[row][-1]==1:
+				elif k==0 and grid[row][rows]==1:
 					grid.append([0,] * cols)
 					k=1
 				#if there exists a live cell in the last column
-				elif l==0 and grid[row][cols-1]==1:
-					for row in range (0,rows):
-						grid[row].extend([0])
-					l=1
+				# elif l==0 and grid[row][cols-1]==1:
+				# 	for row in range (0,rows):
+				# 		grid[row].append(0)
+				# 	l=1
 				#if there exists a live cell in the first column
-				elif m==0 and grid[row][0]==1:
-						for row in range (0,rows):
-							grid[row].extend([0])
-						m=1
+				# elif m==0 and grid[row][0]==1:
+				# 		for row in range (0,rows):
+				# 			grid[row].insert(-1,[0,])
+				# 		m=1
 
-
+				else:
+					pass
 		for row in range(0,rows):
 			for col in range(0,cols):
 				#if the cell is alive and has either fewer than 2 or greater than 3 active neighbors, kill it

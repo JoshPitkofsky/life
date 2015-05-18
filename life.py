@@ -37,7 +37,6 @@ def grid_with_neighborCount(grid):
 	#found a cool list comprehension to help make a 0 matrix with same dimensions of grid(https://docs.python.org/2/tutorial/datastructures.html)
 	#If cols is 6 then [0,] * cols generates [0,0,0,0,0,0] and it does this for i in range rows
 	NeighborCount=[[0,] * cols for row in range (rows)] 
-
 	#ignore buffer
 	for row in range(1,rows-1):
 		for col in range (1,cols-1):
@@ -63,12 +62,37 @@ def iterate(grid, iterations):
 	rows = len(grid)
 	cols = len(grid[5])
 	i=0
+	j=0
+	k=0
+	l=0
+	m=0
 	while i != iterations:
 		#call neighborcount() on the grid so we can use the number of neighbors in our logic
 		NeighborCount = grid_with_neighborCount(grid) 
-		#ignore the buffer
-		for row in range(1,rows-1):
-			for col in range(1,cols-1):
+		for row in range(0,rows):
+			for col in range(0,cols):
+				#if there exists a live cell in top row
+				if j==0 and grid[0][col]==1:
+					grid.insert(0,[0,] * cols)
+					j=1
+				#if there exists a live cell in the bottom row
+				elif k==0 and grid[row][-1]==1:
+					grid.append([0,] * cols)
+					k=1
+				#if there exists a live cell in the last column
+				elif l==0 and grid[row][cols-1]==1:
+					for row in range (0,rows):
+						grid[row].extend([0])
+					l=1
+				#if there exists a live cell in the first column
+				elif m==0 and grid[row][0]==1:
+						for row in range (0,rows):
+							grid[row].extend([0])
+						m=1
+
+
+		for row in range(0,rows):
+			for col in range(0,cols):
 				#if the cell is alive and has either fewer than 2 or greater than 3 active neighbors, kill it
 				if grid[row][col] == 1 and (NeighborCount[row][col]<2 or NeighborCount[row][col]>3):
 					grid[row][col] = 0
@@ -84,6 +108,6 @@ def iterate(grid, iterations):
 		print(chr(27) + "[2J") 
 
 n = input("enter the number of iterations you would like: \n")
-iterate(grid,2700)
+iterate(grid,n)
 
 

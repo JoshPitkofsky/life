@@ -83,6 +83,7 @@ def iterate(grid, iterations):
 		#clear screen, was going to try to use a carriage return but couldn't figure out how to do that on multiple lines
 		print(chr(27) + "[2J") 
 
+n = input("enter the number of iterations you would like: \n")
 iterate(grid,2700)
 
 

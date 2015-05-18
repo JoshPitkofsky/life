@@ -34,11 +34,11 @@ def grid_with_neighborCount(grid):
 
 	#this will contain the number of live neighbors that each cell has
 	NeighborCount = [] 
-	#found a cool list comprehension to help make a 0 matrix (https://docs.python.org/2/tutorial/datastructures.html)
+	#found a cool list comprehension to help make a 0 matrix with same dimensions of grid(https://docs.python.org/2/tutorial/datastructures.html)
 	#If cols is 6 then [0,] * cols generates [0,0,0,0,0,0] and it does this for i in range rows
 	NeighborCount=[[0,] * cols for row in range (rows)] 
 
-	#Might need a buffer (rows-1) (cols-1), we'll see if i can figure out infinite or at least make it wrap around
+	#ignore buffer
 	for row in range(1,rows-1):
 		for col in range (1,cols-1):
 			#count the number of active cells around each cell 
@@ -66,6 +66,7 @@ def iterate(grid, iterations):
 	while i != iterations:
 		#call neighborcount() on the grid so we can use the number of neighbors in our logic
 		NeighborCount = grid_with_neighborCount(grid) 
+		#ignore the buffer
 		for row in range(1,rows-1):
 			for col in range(1,cols-1):
 				#if the cell is alive and has either fewer than 2 or greater than 3 active neighbors, kill it
@@ -75,20 +76,11 @@ def iterate(grid, iterations):
 				elif grid[row][col] == 0 and NeighborCount[row][col] == 3:
 					grid[row][col] = 1
 		display(grid)
-		
-		#add new row to end of matrix
-		grid.append([0,] * cols)
-		#add new row to beginning of matrix
-		grid.insert(0,[0,] * cols)
-		#for each row, add a 0 to the end and beginning
-		for row in range (0,rows):
-			grid[row].extend([0])
-			grid[row].insert(0,[0])
 		#increment counter
 		i+=1
 		#pause
-		time.sleep(1)
-		#clear screen
+		time.sleep(0.1)
+		#clear screen, was going to try to use a carriage return but couldn't figure out how to do that on multiple lines
 		print(chr(27) + "[2J") 
 
 iterate(grid,2700)
